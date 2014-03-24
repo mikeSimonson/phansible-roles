@@ -15,5 +15,5 @@
 
 - name: Change default apache site
   sudo: yes
-  template: src=vhost.conf.tpl dest=/etc/apache2/sites-available/default
+  template: src=vhost.conf.tpl dest=/etc/apache2/sites-available/000-default.conf
   notify: restart apache
