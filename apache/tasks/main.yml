@@ -13,7 +13,17 @@
     - expires
     - filter
 
-- name: Change default apache site
+- shell: apache2 -v
+  register: apache_version
+
+- name: Change default apache2.4 site
   sudo: yes
   template: src=vhost.conf.tpl dest=/etc/apache2/sites-available/000-default.conf
   notify: restart apache
+  when: apache_version.stdout.find('Apache/2.4.') != -1
+
+- name: Change default apache2.2 site
+  sudo: yes
+  template: src=vhost.conf.tpl dest=/etc/apache2/sites-available/default.conf
+  notify: restart apache
+  when: apache_version.stdout.find('Apache/2.2.') != -1
