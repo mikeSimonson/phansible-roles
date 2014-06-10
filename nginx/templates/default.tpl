@@ -7,7 +7,7 @@ server {
     server_name {{ ansible_eth1.ipv4.address }};
 
     location / {
-        try_files $uri $uri/ /index.php;
+        try_files $uri $uri/ /index.php?$query_string;
     }
 
     error_page 404 /404.html;
